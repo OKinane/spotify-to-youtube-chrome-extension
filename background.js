@@ -1,4 +1,4 @@
-  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  chrome.runtime.onMessage.addListener(function(request, sender) {
     if (request.message === 'performYouTubeSearch') {
       const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(request.query)}`;
 

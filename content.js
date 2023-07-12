@@ -1,15 +1,6 @@
-window.addEventListener("load", function() {
-    if (this.document.location.href.includes(".spotify.com/embed")) {
-        replaceSpotifyPlayer();
-    }
-  });
-
-function replaceSpotifyPlayer() {
-    const text = document.querySelector("body").innerText;
-    const [title, band, ..._] = text.split('\n');
-
+if (this.document.location.href.includes(".spotify.com/embed")) {
     // Listen for messages from the background script
-    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    chrome.runtime.onMessage.addListener(function(request) {
       if (request.message === 'youtubeSearchResults') {
         const youtubeVideoId = request.firstVideoId;
         if (youtubeVideoId) {
@@ -18,5 +9,9 @@ function replaceSpotifyPlayer() {
       }
     });
 
-    chrome.runtime.sendMessage({ message: 'performYouTubeSearch', query: `${band} ${title}` });
+    window.addEventListener("load", function() {
+        const text = document.querySelector("body").innerText;
+        const [title, band, ..._] = text.split('\n');
+        chrome.runtime.sendMessage({ message: 'performYouTubeSearch', query: `${band} ${title}` });
+  });
 }
