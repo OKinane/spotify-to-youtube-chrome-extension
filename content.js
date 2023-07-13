@@ -1,4 +1,4 @@
-if (this.document.location.href.includes(".spotify.com/embed")) {
+if (this.document.location.href.includes(".spotify.com/embed/track/")) {
     // Listen for messages from the background script
     chrome.runtime.onMessage.addListener(function (request) {
         if (request.message === "youtubeSearchResults") {
