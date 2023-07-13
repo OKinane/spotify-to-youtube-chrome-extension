@@ -10,6 +10,7 @@ chrome.runtime.onMessage.addListener(function (request, sender) {
                 const firstVideoId = htmlContent.match('"videoId":"(.+?)"')[1];
                 chrome.tabs.sendMessage(sender.tab.id, {
                     message: "youtubeSearchResults",
+                    url: request.url,
                     firstVideoId,
                 });
             })
