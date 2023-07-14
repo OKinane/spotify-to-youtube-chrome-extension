@@ -19,8 +19,8 @@ if (type) {
     });
 
     window.addEventListener("load", function () {
-        const text = document.querySelector("body").innerText;
-        const [title, band, ..._] = text.split("\n");
+        const title = document.querySelector("h1").innerText;
+        const band = document.querySelector("h2").innerText;
         chrome.runtime.sendMessage({
             message: "performYouTubeSearch",
             url: this.document.location.href,
