@@ -12,7 +12,7 @@ if (type) {
                 const newLocation = type == "track" ?
                 `https://www.youtube-nocookie.com/embed/${youtubeVideoId}`
                 : `https://www.youtube-nocookie.com/embed?listType=playlist&list=${youtubeVideoId}`
-                console.log("swapping with ", newLocation);
+                console.log("[SPOTIFY2YOUTUBE] swapping with:", newLocation);
                 document.location.href = newLocation;
             }
         }
@@ -21,6 +21,7 @@ if (type) {
     window.addEventListener("load", function () {
         const title = document.querySelector("h1").innerText;
         const band = document.querySelector("h2").innerText;
+        console.log("[SPOTIFY2YOUTUBE] searching for", type, band, "-", title);
         chrome.runtime.sendMessage({
             message: "performYouTubeSearch",
             url: this.document.location.href,
@@ -35,7 +36,6 @@ function getSpotifyEmbeddedPlayerType() {
         return "track";
     }
     if (this.document.location.href.includes(".spotify.com/embed/album/")) {
-        // https://open.spotify.com/embed/album/2XlIL7wXd4j2vAUvFI3cO8?si=_2XlJqjSSMOIHzy7JVruUw&utm_source=oembed
         return "playlist";
     }
     return null;

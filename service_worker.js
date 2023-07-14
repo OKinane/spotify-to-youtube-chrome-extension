@@ -14,7 +14,7 @@ chrome.runtime.onMessage.addListener(function (request, sender) {
             .then((htmlContent) => {
                 const pattern = request.type === "track" ? '"videoId":"(.+?)"' : '"playlistId":"(PL.+?)"'
                 const firstVideoId = htmlContent.match(pattern)[1];
-                console.log("found ", firstVideoId);
+                console.log("found", firstVideoId);
                 chrome.tabs.sendMessage(sender.tab.id, {
                     message: "youtubeSearchResults",
                     url: request.url,
